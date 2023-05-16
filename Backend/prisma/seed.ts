@@ -87,7 +87,7 @@ async function run() {
         date: new Date('2023-01-06T03:00:00.000z'),
         dayHabits: {
           create: {
-            habit_id: thirdHabitId,
+            habit_id: firstHabitId,
           }
         }
       }

@@ -1,12 +1,29 @@
+// Importação para utilizar recursos do Fastify
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
-import { AppRoutes } from './routes'
+// Importação das rotas
+import { appRoutes } from './routes'
+import { notificationRoutes } from './notifications-routes'
+
+// Cria a aplicação executando a função Fastify()
 const app = Fastify()
-app.register(cors) // registra segurança na aplicação
-app.register(AppRoutes) // registra as rotas na aplicação
-app.listen({
-    port: 3333,
-})
-.then( () => {
-    console.log('Http Server running')
-})
+
+// Cria a integração com o Front-End
+app.register(cors)
+// Posso configurar para apenas alguns endereços poderem consumir os dados do Back-End, bastamos utilizar o "origin: 'http://endereço/rota'"
+
+// Cria a integração com rotas
+app.register(appRoutes)
+
+app.register(notificationRoutes)
+
+// Faz com que nossa aplicação se conecte através da porta passada por parâmetro (3333)
+// O .then() faz com que execute aquela mensagem enquanto o servidor está sendo executado.
+app
+	.listen({
+		port: 3333,
+		host: '0.0.0.0',
+	})
+	.then(() => {
+		console.log('HTTP Server Running')
+	})
